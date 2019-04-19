@@ -22,3 +22,34 @@ void printMenu(){
 	printf("Digite uma opcao: \n");
 }
 
+
+void printPessoa(Pessoa p){
+	if(p != NULL){
+		printf("Nome: %s\n",p->nome );
+		printf("Idade: %d\n",p->idade);
+		printf("Quantidade de filhos: %d\n",p->numFilhos);
+		printf("Salario: %f\n",p->salario);
+		printf("CPF: %s\n",p->CPF);
+	}
+}
+
+int compCPF(void *x, char *b){
+	Pessoa *a = (Pessoa*)x;
+	if(strcmp(a->CPF, *b)==0){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+
+
+int compNome(void *x, char *b){
+	Pessoa *a = (Pessoa*)x;
+	if(strcmp(a->nome, *b)==0){
+		return true;
+	}else{
+		return false;
+	}
+}
+

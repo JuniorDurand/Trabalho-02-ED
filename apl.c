@@ -53,13 +53,9 @@ int main(){
 			Pessoa *p = (Pessoa*)malloc(sizeof(Pessoa));
 			p = (Pessoa*)colQueryFirst(pessoas);
 			while(p != NULL){
-				printf("Nome: %s\n",p->nome );
-				printf("Idade: %d\n",p->idade);
-				printf("Quantidade de filhos: %d\n",p->numFilhos);
-				printf("Salario: %f\n",p->salario);
-				printf("CPF: %s\n",p->CPF);
-				p = (Pessoa*)colQueryNext(pessoas);
+				printPessoa(p);
 				printf("\n---------------\n");
+				p = (Pessoa*)colQueryNext(pessoas);
 			}
 		}else if(opcao == 5){
 			//codigo para remover elementos
