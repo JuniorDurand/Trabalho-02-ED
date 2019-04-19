@@ -41,6 +41,28 @@ int main(){
 				printf("Elemento não inserido na colecao\n");
 			}
 
+		}else if(opcao == 2){
+			//codigo para procurar elementos na coleção
+		}else if(opcao == 3){
+			//codigo para remover elementos
+		}else if(opcao == 4){
+			//codigo para listar todos os elemetos da coleção
+			printf("\n---------------\n");		
+			Pessoa *p = (Pessoa*)malloc(sizeof(Pessoa));
+			p = (Pessoa*)colQueryFirst(c);
+			while(p != NULL){
+				printf("Nome: %s\n",p->nome );
+				printf("Idade: %d\n",p->idade);
+				printf("Quantidade de filhos: %d\n",p->numFilhos);
+				printf("Salario: %f\n",p->salario);
+				printf("CPF: %s\n",p->CPF);
+				p = (Pessoa*)colQueryNext(c);
+				printf("\n---------------\n");
+			}
+		}else if(opcao == 5){
+			//codigo para remover elementos
+		}else{
+			//codigo de opcao invalida
 		}
 
 
