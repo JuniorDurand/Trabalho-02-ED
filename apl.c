@@ -7,32 +7,34 @@
 int main(){
 	int TotalElms, opcao = 0;
 	printf("Digite capacidade total da colecao:");
+	setbuf(stdin, NULL);
 	scanf("%d", &TotalElms);
-	Col *pessoas = colCreat(TotalElms);
+	Col *pessoas = colCreate(TotalElms);
 	if(pessoas == NULL){
 		return 0;// TESTA SE FOI ALOCADA A MATRIZ
 	}
 
 	do{
 		printMenu();
+		setbuf(stdin, NULL);
 		scanf("%d", &opcao);
 
 		if(opcao == 1){
 			Pessoa *p = (Pessoa*)malloc(sizeof(Pessoa));
 			printf("Digite o nome:");
-			fflush(stdin);
+			setbuf(stdin, NULL);
 			fgets(p->nome,50,stdin);
-			fflush(stdin);
 			printf("Digite a idade:");
+			setbuf(stdin, NULL);
 			scanf("%d", &(p->idade));
-			fflush(stdin);
 			printf("Digite a quantidade de filhos:");
+			setbuf(stdin, NULL);
 			scanf("%d", &(p->numFilhos));
-			fflush(stdin);
 			printf("Digite o salario:");
-			scanf("%d", &(p->salario));
-			fflush(stdin);
+			setbuf(stdin, NULL);
+			scanf("%f", &(p->salario));
 			printf("Digite o CPF:");
+			setbuf(stdin, NULL);
 			fgets(p->CPF,15,stdin);
 			int flag = colInsert(pessoas, (void*)p);
 			if(flag){
@@ -49,14 +51,14 @@ int main(){
 			//codigo para listar todos os elemetos da coleção
 			printf("\n---------------\n");		
 			Pessoa *p = (Pessoa*)malloc(sizeof(Pessoa));
-			p = (Pessoa*)colQueryFirst(c);
+			p = (Pessoa*)colQueryFirst(pessoas);
 			while(p != NULL){
 				printf("Nome: %s\n",p->nome );
 				printf("Idade: %d\n",p->idade);
 				printf("Quantidade de filhos: %d\n",p->numFilhos);
 				printf("Salario: %f\n",p->salario);
 				printf("CPF: %s\n",p->CPF);
-				p = (Pessoa*)colQueryNext(c);
+				p = (Pessoa*)colQueryNext(pessoas);
 				printf("\n---------------\n");
 			}
 		}else if(opcao == 5){
