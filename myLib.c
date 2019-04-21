@@ -194,7 +194,9 @@ void removePessoa(Col *c){
 				Pessoa *pesRemov;
 				pesRemov = retornaPorNome(c);
 				if(pesRemov!=NULL){
+					pesRemov = (Pessoa*)colRemoveVoid(c, (void*)pesRemov);
 					printPessoa(pesRemov);
+
 					free(pesRemov);
 					printf("Pessoa removida com sucesso\n");
 				}else{
@@ -205,6 +207,8 @@ void removePessoa(Col *c){
 				Pessoa *pesRemov;
 				pesRemov = retornaPorCPF(c);
 				if(pesRemov!=NULL){
+					Pessoa *aux = (Pessoa*)colRemoveVoid(c, (void*)pesRemov);
+					printf("testando\n");
 					printPessoa(pesRemov);
 					free(pesRemov);
 					printf("Pessoa removida com sucesso\n");

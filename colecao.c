@@ -15,6 +15,10 @@ typedef struct _colecao_{
 }Col;
 */
 
+void colStatus(Col *c){
+	printf("\n max: %d | numElms %d | cur %d \n", c->max, c->numElms, c->cur);
+}
+
 Col* colCreate(int n){
 	Col* c;
 	if(n>0){
@@ -86,16 +90,16 @@ void* colRemoveFirst(Col *c){
 void* colRemoveVoid(Col *c, void *x){
 	if(c != NULL){
 		if(c-> numElms > 0 ){
-			Col *aux;
+			void *aux;
 			int i;
 			for( i=0; i<c->numElms-1; i++){
-				if (x == elms[i]){
-					aux = elms[i];
+				if (x == c->elms[i]){
+					aux = colRemoveN(c, i);
+					return aux;
+					break;
 				}
 			}
-			for( i=i; i<c->numElms-1; i++){
-				c->elms[i]=c->elms[i+1];
-			}
+			
 			c->numElms--;
 			return aux;
 		}
@@ -106,12 +110,13 @@ void* colRemoveVoid(Col *c, void *x){
 void* colRemoveN(Col *c, int n){
 	if(c != NULL){
 		if(c-> numElms > 0 && c->numElms > n){
-			Col *aux;
+			void *aux;
 			aux = c->elms[n];
 			for(int i=n; i<c->numElms-1; i++){
 				c->elms[i]=c->elms[i+1];
 			}
 			c->numElms--;
+			c->elms[c->numElms]=NULL;
 			return aux;
 		}
 	}

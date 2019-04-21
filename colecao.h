@@ -9,6 +9,7 @@
 			void* *elms;//vetor de void* de tamanho max
 		}Col;
 
+		void colStatus(Col *c);
 		Col* colCreate(int n);
 		int colInsert(Col*c, void* elm);
 		Col* colQuery(Col *c, int n);
@@ -25,6 +26,7 @@
 	#else
 		typedef struct _colecao_ Col;
 		extern Col* colCreate(int n);
+		extern void colStatus(Col *c);
 		extern int colInsert(Col*c, void* elm);
 		extern Col* colQuery(Col *c, int n);
 		//extern Col* colRemove(Col *c, void* elm);

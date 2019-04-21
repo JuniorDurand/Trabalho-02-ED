@@ -55,6 +55,7 @@ int main(){
 			Pessoa *p = (Pessoa*)malloc(sizeof(Pessoa));
 			p = (Pessoa*)colQueryFirst(pessoas);
 			while(p != NULL){
+				colStatus(pessoas);
 				printPessoa(p);
 				printf("\n---------------\n");
 				p = (Pessoa*)colQueryNext(pessoas);
