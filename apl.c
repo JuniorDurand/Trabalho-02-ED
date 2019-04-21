@@ -62,31 +62,7 @@ int main(){
 			}
 		}else if(opcao == 5){
 			//codigo para destruir coleção;
-			int teste = colDestroy(pessoas);
-			if(teste == true){
-				printf("Colecao destruida com sucesso\n");
-			}else{
-				printf("Erro ao destruir colecao\n");
-				printf("Elementos dentro da colecao.\n");
-				printf("Remover todos os elementos e destruir(1 - Sim/ 2 -Nao).\n");
-				int remov;
-				setbuf(stdin,NULL);
-				scanf("%d",&remov);
-				if(remov == 1){
-					Pessoa *p = (Pessoa*)colRemoveLast(pessoas);
-					while(p!=NULL){
-						printPessoa(p);
-						p = (Pessoa*)colRemoveLast(pessoas);
-					}
-					teste = colDestroy(pessoas);
-					if (teste == true){
-						printf("Colecao destruida com sucesso\n");
-					}else{
-						printf("ERRO ao destruir colecao\n");
-					}
-				}
-
-			}
+			destruirColecaoESair(pessoas);
 		}else{
 			printf("Opcao invalida \nDigite uma opcao valida");
 		}

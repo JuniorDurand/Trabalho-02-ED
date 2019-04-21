@@ -217,3 +217,31 @@ void removePessoa(Col *c){
 		}while(opcao < 1 || opcao > 2);
 	}
 }
+
+void destruirColecaoESair(Col *c){
+	int teste = colDestroy(pessoas);
+	if(teste == true){
+		printf("Colecao destruida com sucesso\n");
+	}else{
+		printf("Erro ao destruir colecao\n");
+		printf("Elementos dentro da colecao.\n");
+		printf("Remover todos os elementos e destruir(1 - Sim/ 2 -Nao).\n");
+		int remov;
+		setbuf(stdin,NULL);
+		scanf("%d",&remov);
+		if(remov == 1){
+			Pessoa *p = (Pessoa*)colRemoveLast(pessoas);
+			while(p!=NULL){
+				printPessoa(p);
+				p = (Pessoa*)colRemoveLast(pessoas);
+			}
+			teste = colDestroy(pessoas);
+			if (teste == true){
+				printf("Colecao destruida com sucesso\n");
+			}else{
+				printf("ERRO ao destruir colecao\n");
+			}
+		}
+
+	}
+}
