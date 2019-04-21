@@ -89,7 +89,7 @@ void* colRemoveVoid(Col *c, void *x){
 			Col *aux;
 			int i;
 			for( i=0; i<c->numElms-1; i++){
-				if (x == emls[i]){
+				if (x == elms[i]){
 					aux = elms[i];
 				}
 			}
