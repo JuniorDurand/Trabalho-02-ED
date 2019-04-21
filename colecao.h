@@ -16,6 +16,7 @@
 		int colDestroy(Col *c);
 		void* colRemoveLast(Col *c);
 		void* colRemoveFirst(Col *c);
+		void* colRemoveVoid(Col *c, void *x);
 		void* colRemoveN(Col *c, int n);
 		void* colQueryFirst(Col *c);
 		void* colQueryNext(Col *c);
@@ -31,6 +32,7 @@
 		extern void* colRemoveLast(Col *c);
 		extern void* colRemoveFirst(Col *c);
 		extern void* colRemoveN(Col *c, int n);
+		extern void* colRemoveVoid(Col *c, void *x);
 		extern void* colQueryFirst(Col *c);
 		extern void* colQueryNext(Col *c);
 		extern void* colQueryN(Col *c, int n);
