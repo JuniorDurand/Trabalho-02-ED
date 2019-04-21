@@ -111,6 +111,50 @@ int procuraPorCPF(Col *c){
 }
 
 
+Pessoa* retornaPorNome(Col *c){
+	Pessoa *p;
+	char nomeProc[50];
+	int flag = true;
+	printf("Digite o nome:");
+	setbuf(stdin, NULL);
+	fgets(nomeProc,50,stdin);
+	p = (Pessoa*)colQueryFirst(c);
+	while(p != NULL){
+		if(compNome( p, nomeProc)){
+			flag = false;
+			return p;
+		}else{
+			p = (Pessoa*)colQueryNext(c);
+		}
+	}
+	if(flag){
+		//printf("\nPessoa não encontrada\n");
+		return NULL;
+	}
+}
+
+Pessoa* retornaPorCPF(Col *c){
+	Pessoa *p;
+	char CPFProc[15];
+	int flag = true;
+	printf("Digite o CPF:");
+	setbuf(stdin, NULL);
+	fgets(CPFProc,15,stdin);
+	p = (Pessoa*)colQueryFirst(c);
+	while(p != NULL){
+		if(compCPF( p, CPFProc)){
+			flag = false;
+			return p;
+		}else{
+			p = (Pessoa*)colQueryNext(c);
+		}
+	}
+	if(flag){
+		//printf("\nPessoa não encontrada\n");
+		return NULL;
+	}
+}
+
 void ProcuraPessoa(Col *c){
 	if(c != NULL){
 		int opcao;
@@ -131,6 +175,41 @@ void ProcuraPessoa(Col *c){
 				teste = procuraPorCPF(c);
 				if(!teste){
 					printf("\nPessoa nao encontrada\n");
+				}
+			}
+		}while(opcao < 1 || opcao > 2);
+	}
+}
+
+
+void removePessoa(Col *c){
+	if(c != NULL){
+		int opcao;
+		
+		do{
+			printMenuProcura();
+			setbuf(stdin, NULL);
+			scanf("%d", &opcao);
+			if(opcao == 1){
+				Pessoa *pesRemov;
+				pesRemov = retornaPorNome(c);
+				if(pesRemov!=NULL){
+					printPessoa(pesRemov);
+					free(pesRemov);
+					printf("Pessoa removida com sucesso\n");
+				}else{
+					printf("Pessoa nao encontrada\n");
+				}				
+
+			}else if(opcao == 2){
+				Pessoa *pesRemov;
+				pesRemov = retornaPorCPF(c);
+				if(pesRemov!=NULL){
+					printPessoa(pesRemov);
+					free(pesRemov);
+					printf("Pessoa removida com sucesso\n");
+				}else{
+					printf("Pessoa nao encontrada\n");
 				}
 			}
 		}while(opcao < 1 || opcao > 2);

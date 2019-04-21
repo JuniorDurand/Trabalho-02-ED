@@ -48,6 +48,7 @@ int main(){
 			ProcuraPessoa(pessoas);
 		}else if(opcao == 3){
 			//codigo para remover elementos
+			removePessoa(pessoas);
 		}else if(opcao == 4){
 			//codigo para listar todos os elemetos da coleção
 			printf("\n---------------\n");		
