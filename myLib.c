@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <stdbool.h>
 #include "colecao.h"
 
@@ -23,9 +24,9 @@ void printMenu(){
 }
 
 
-void printPessoa(Pessoa p){
+void printPessoa(Pessoa *p){
 	if(p != NULL){
-		printf("Nome: %s\n",p->nome );
+		printf("Nome: %s",p->nome );
 		printf("Idade: %d\n",p->idade);
 		printf("Quantidade de filhos: %d\n",p->numFilhos);
 		printf("Salario: %f\n",p->salario);
@@ -33,23 +34,105 @@ void printPessoa(Pessoa p){
 	}
 }
 
+void printMenuProcura(){
+	printf("1 - Procurar por nome\n");
+	printf("2 - Procurar por CPF\n");
+}
+
 int compCPF(void *x, char *b){
 	Pessoa *a = (Pessoa*)x;
-	if(strcmp(a->CPF, *b)==0){
+	if(strcmp(a->CPF, b)==0){
 		return true;
 	}else{
 		return false;
 	}
 }
+
+
+
 
 
 
 int compNome(void *x, char *b){
 	Pessoa *a = (Pessoa*)x;
-	if(strcmp(a->nome, *b)==0){
+	if(strcmp(a->nome, b)==0){
 		return true;
 	}else{
 		return false;
 	}
 }
 
+
+
+int procuraPorNome(Col *c){
+	Pessoa *p;
+	char nomeProc[50];
+	int flag = true;
+	printf("Digite o nome:");
+	setbuf(stdin, NULL);
+	fgets(nomeProc,50,stdin);
+	p = (Pessoa*)colQueryFirst(c);
+	while(p != NULL){
+		if(compNome( p, nomeProc)){
+			printPessoa(p);
+			//flag = false;
+			return true;
+		}else{
+			p = (Pessoa*)colQueryNext(c);
+		}
+	}
+	if(flag){
+		//printf("\nPessoa não encontrada\n");
+		return false;
+	}
+}
+
+int procuraPorCPF(Col *c){
+	Pessoa *p;
+	char CPFProc[15];
+	int flag = true;
+	printf("Digite o CPF:");
+	setbuf(stdin, NULL);
+	fgets(CPFProc,15,stdin);
+	p = (Pessoa*)colQueryFirst(c);
+	while(p != NULL){
+		if(compCPF( p, CPFProc)){
+			printPessoa(p);
+			//flag = false;
+			return true;
+		}else{
+			p = (Pessoa*)colQueryNext(c);
+		}
+	}
+	if(flag){
+		//printf("\nPessoa não encontrada\n");
+		return false;
+	}
+}
+
+
+void ProcuraPessoa(Col *c){
+	if(c != NULL){
+		int opcao;
+		
+		do{
+			printMenuProcura();
+			setbuf(stdin, NULL);
+			scanf("%d", &opcao);
+			if(opcao == 1){
+				int teste;
+				teste = procuraPorNome(c);
+				if(!teste){
+					printf("\nPessoa nao encontrada\n");
+				}				
+
+			}else if(opcao == 2){
+				int teste;
+				teste = procuraPorCPF(c);
+				if(!teste){
+					printf("\nPessoa nao encontrada\n");
+				}
+			}
+		}while(opcao < 1 || opcao > 2);
+	}
+}

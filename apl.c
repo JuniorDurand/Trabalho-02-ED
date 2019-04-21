@@ -45,6 +45,7 @@ int main(){
 
 		}else if(opcao == 2){
 			//codigo para procurar elementos na coleção
+			ProcuraPessoa(pessoas);
 		}else if(opcao == 3){
 			//codigo para remover elementos
 		}else if(opcao == 4){
@@ -58,7 +59,7 @@ int main(){
 				p = (Pessoa*)colQueryNext(pessoas);
 			}
 		}else if(opcao == 5){
-			//codigo para remover elementos
+			//codigo para destruir coleção;
 		}else{
 			//codigo de opcao invalida
 		}
