@@ -62,7 +62,7 @@ int main(){
 			}
 		}else if(opcao == 5){
 			//codigo para destruir coleção;
-			destruirColecaoESair(pessoas);
+			opcao = destruirColecaoESair(pessoas);
 		}else{
 			printf("Opcao invalida \nDigite uma opcao valida");
 		}

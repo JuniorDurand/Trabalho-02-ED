@@ -218,10 +218,11 @@ void removePessoa(Col *c){
 	}
 }
 
-void destruirColecaoESair(Col *c){
+int destruirColecaoESair(Col *pessoas){
 	int teste = colDestroy(pessoas);
 	if(teste == true){
 		printf("Colecao destruida com sucesso\n");
+		return 5;
 	}else{
 		printf("Erro ao destruir colecao\n");
 		printf("Elementos dentro da colecao.\n");
@@ -238,10 +239,13 @@ void destruirColecaoESair(Col *c){
 			teste = colDestroy(pessoas);
 			if (teste == true){
 				printf("Colecao destruida com sucesso\n");
+				return 5;
 			}else{
 				printf("ERRO ao destruir colecao\n");
+				return 0;
 			}
 		}
 
 	}
+	return 0;
 }
