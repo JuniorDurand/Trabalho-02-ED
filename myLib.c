@@ -254,11 +254,28 @@ void removePessoa(Col *c){
 	}
 }
 
-int destruirColecaoESair(Col *pessoas){
+void printTodasPessoas(Col *c){
+	if(c != NULL){
+		printf("\n---------------\n");		
+		Pessoa *p = (Pessoa*)malloc(sizeof(Pessoa));
+		p = (Pessoa*)colQueryFirst(c);
+		while(p != NULL){
+			colStatus(c);
+			printPessoa(p);
+			printf("\n---------------\n");
+			p = (Pessoa*)colQueryNext(c);
+		}
+	}
+}
+
+
+
+
+void destruirColecao(Col *pessoas){
 	int teste = colDestroy(pessoas);
 	if(teste == true){
+		pessoas = NULL;
 		printf("Colecao destruida com sucesso\n");
-		return 5;
 	}else{
 		printf("Erro ao destruir colecao\n");
 		printf("Elementos dentro da colecao.\n");
@@ -274,14 +291,13 @@ int destruirColecaoESair(Col *pessoas){
 			}
 			teste = colDestroy(pessoas);
 			if (teste == true){
+				pessoas = NULL;
 				printf("Colecao destruida com sucesso\n");
-				return 5;
+
 			}else{
 				printf("ERRO ao destruir colecao\n");
-				return 0;
 			}
 		}
 
 	}
-	return 0;
 }

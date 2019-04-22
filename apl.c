@@ -6,7 +6,7 @@
 
 int main(){
 	int TotalElms, opcao = 0;
-	Col *pessoas;
+	Col *pessoas = NULL;
 	
 
 	do{
@@ -14,10 +14,11 @@ int main(){
 		setbuf(stdin, NULL);
 		scanf("%d", &opcao);
 		if(opcao == 0){
-			if (pessoas != NULL){
+			if (pessoas == NULL){
 				return 0;
 			}else{
-				printf("colecao alocada na memoria \nPara prosseguir destrua a colecao\n");
+				printf("ERRO: colecao alocada na memoria \nPara prosseguir destrua a colecao\n");
+				opcao = -1;
 			}
 		}else if(opcao == 1){
 			if(pessoas != NULL){
@@ -56,18 +57,21 @@ int main(){
 
 		}else if(opcao == 5){
 			//codigo para listar todos os elemetos da coleção
-			printf("\n---------------\n");		
-			Pessoa *p = (Pessoa*)malloc(sizeof(Pessoa));
-			p = (Pessoa*)colQueryFirst(pessoas);
-			while(p != NULL){
-				colStatus(pessoas);
-				printPessoa(p);
-				printf("\n---------------\n");
-				p = (Pessoa*)colQueryNext(pessoas);
+
+			if(pessoas != NULL){
+				printTodasPessoas(pessoas);
+			}else{
+				printf("ERRO: Colecao inexistente\n");
 			}
+
 		}else if(opcao == 6){
 			//codigo para destruir coleção;
-			opcao = destruirColecaoESair(pessoas);
+			
+			if(pessoas != NULL){
+				destruirColecao(pessoas);
+			}else{
+				printf("ERRO: Colecao inexistente\n");
+			}
 		}else{
 			printf("Opcao invalida \nDigite uma opcao valida");
 		}
