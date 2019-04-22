@@ -278,10 +278,7 @@ void destruirColecao(Col *pessoas){
 		printf("Colecao destruida com sucesso\n");
 	}else{
 		printf("Erro ao destruir colecao\n");
-		if(pessoas->numElms>0){
-				printf("Elementos dentro da colecao.\n");
-		}
-		/*
+		printf("Elementos dentro da colecao.\n");
 		printf("Remover todos os elementos e destruir(1 - Sim/ 2 -Nao).\n");
 		int remov;
 		setbuf(stdin,NULL);
@@ -301,7 +298,6 @@ void destruirColecao(Col *pessoas){
 				printf("ERRO ao destruir colecao\n");
 			}
 		}
-		*/
 
 	}
 }
