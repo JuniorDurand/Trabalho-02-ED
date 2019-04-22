@@ -36,6 +36,40 @@ void printPessoa(Pessoa *p){
 	}
 }
 
+
+void criaPessoa(Col *c){
+	if(c != NULL){
+		Pessoa *p = (Pessoa*)malloc(sizeof(Pessoa));
+		printf("Digite o nome:");
+		setbuf(stdin, NULL);
+		fgets(p->nome,50,stdin);
+		printf("Digite a idade:");
+		setbuf(stdin, NULL);
+		scanf("%d", &(p->idade));
+		printf("Digite a quantidade de filhos:");
+		setbuf(stdin, NULL);
+		scanf("%d", &(p->numFilhos));
+		printf("Digite o salario:");
+		setbuf(stdin, NULL);
+		scanf("%f", &(p->salario));
+		printf("Digite o CPF:");
+		setbuf(stdin, NULL);
+		fgets(p->CPF,15,stdin);
+		int flag = colInsert(c, (void*)p);
+		if(flag){
+			printf("Elemento inserido com sucesso\n");
+		}else{
+			printf("Elemento não inserido na colecao\n");
+		}
+	}else{
+		printf("ERRO: colecao inexistente\n");
+	}
+
+}
+
+
+
+
 void printMenuProcura(){
 	printf("1 - Procurar por nome\n");
 	printf("2 - Procurar por CPF\n");

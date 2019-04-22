@@ -30,35 +30,30 @@ int main(){
 			}
 	
 		}else if(opcao == 2){
-			Pessoa *p = (Pessoa*)malloc(sizeof(Pessoa));
-			printf("Digite o nome:");
-			setbuf(stdin, NULL);
-			fgets(p->nome,50,stdin);
-			printf("Digite a idade:");
-			setbuf(stdin, NULL);
-			scanf("%d", &(p->idade));
-			printf("Digite a quantidade de filhos:");
-			setbuf(stdin, NULL);
-			scanf("%d", &(p->numFilhos));
-			printf("Digite o salario:");
-			setbuf(stdin, NULL);
-			scanf("%f", &(p->salario));
-			printf("Digite o CPF:");
-			setbuf(stdin, NULL);
-			fgets(p->CPF,15,stdin);
-			int flag = colInsert(pessoas, (void*)p);
-			if(flag){
-				printf("Elemento inserido com sucesso\n");
+			if(pessoas != NULL){
+				criaPessoa(pessoas);
 			}else{
-				printf("Elemento não inserido na colecao\n");
+				printf("ERRO: Colecao inexistente\n");
 			}
 
 		}else if(opcao == 3){
 			//codigo para procurar elementos na coleção
-			ProcuraPessoa(pessoas);
+			
+			if(pessoas != NULL){
+				ProcuraPessoa(pessoas);
+			}else{
+				printf("ERRO: Colecao inexistente\n");
+			}
+
 		}else if(opcao == 4){
 			//codigo para remover elementos
-			removePessoa(pessoas);
+			
+			if(pessoas != NULL){
+				removePessoa(pessoas);
+			}else{
+				printf("ERRO: Colecao inexistente\n");
+			}
+
 		}else if(opcao == 5){
 			//codigo para listar todos os elemetos da coleção
 			printf("\n---------------\n");		
