@@ -15,11 +15,13 @@ typedef struct _pessoa_{
 
 
 void printMenu(){
-	printf("1 - Inserir elemento\n");
-	printf("2 - Consultar elemento\n");
-	printf("3 - Remover elemento\n");
-	printf("4 - Listar todos os elementos\n");
-	printf("5 - Destruir estrutura e sair\n");
+	printf("1 - Criar Colecao\n");
+	printf("2 - Inserir elemento\n");
+	printf("3 - Consultar elemento\n");
+	printf("4 - Remover elemento\n");
+	printf("5 - Listar todos os elementos\n");
+	printf("6 - Destruir estrutura\n");
+	printf("0 - Sair\n");
 	printf("Digite uma opcao: \n");
 }
 

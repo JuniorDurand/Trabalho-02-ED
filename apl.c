@@ -6,20 +6,30 @@
 
 int main(){
 	int TotalElms, opcao = 0;
-	printf("Digite capacidade total da colecao:");
-	setbuf(stdin, NULL);
-	scanf("%d", &TotalElms);
-	Col *pessoas = colCreate(TotalElms);
-	if(pessoas == NULL){
-		return 0;// TESTA SE FOI ALOCADA A MATRIZ
-	}
+	Col *pessoas;
+	
 
 	do{
 		printMenu();
 		setbuf(stdin, NULL);
 		scanf("%d", &opcao);
-
-		if(opcao == 1){
+		if(opcao == 0){
+			if (pessoas != NULL){
+				return 0;
+			}else{
+				printf("colecao alocada na memoria \nPara prosseguir destrua a colecao\n");
+			}
+		}else if(opcao == 1){
+			if(pessoas != NULL){
+				printf("Colecao ja criada\n");
+			}else{
+				printf("Digite capacidade total da colecao:");
+				setbuf(stdin, NULL);
+				scanf("%d", &TotalElms);
+				pessoas = colCreate(TotalElms);
+			}
+	
+		}else if(opcao == 2){
 			Pessoa *p = (Pessoa*)malloc(sizeof(Pessoa));
 			printf("Digite o nome:");
 			setbuf(stdin, NULL);
@@ -43,13 +53,13 @@ int main(){
 				printf("Elemento não inserido na colecao\n");
 			}
 
-		}else if(opcao == 2){
+		}else if(opcao == 3){
 			//codigo para procurar elementos na coleção
 			ProcuraPessoa(pessoas);
-		}else if(opcao == 3){
+		}else if(opcao == 4){
 			//codigo para remover elementos
 			removePessoa(pessoas);
-		}else if(opcao == 4){
+		}else if(opcao == 5){
 			//codigo para listar todos os elemetos da coleção
 			printf("\n---------------\n");		
 			Pessoa *p = (Pessoa*)malloc(sizeof(Pessoa));
@@ -60,7 +70,7 @@ int main(){
 				printf("\n---------------\n");
 				p = (Pessoa*)colQueryNext(pessoas);
 			}
-		}else if(opcao == 5){
+		}else if(opcao == 6){
 			//codigo para destruir coleção;
 			opcao = destruirColecaoESair(pessoas);
 		}else{
@@ -69,7 +79,7 @@ int main(){
 
 
 
-	}while(opcao != 5);
+	}while(opcao != 0);
 	return 0;
 }
 
