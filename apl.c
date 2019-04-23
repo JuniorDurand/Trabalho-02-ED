@@ -69,11 +69,12 @@ int main(){
 			
 			if(pessoas != NULL){
 				destruirColecao(pessoas);
+				pessoas = NULL;
 			}else{
 				printf("ERRO: Colecao inexistente\n");
 			}
 		}else{
-			printf("Opcao invalida \nDigite uma opcao valida");
+			printf("Opcao invalida \nDigite uma opcao valida\n");
 		}
 
 
