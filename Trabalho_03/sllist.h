@@ -13,7 +13,7 @@
 		}SLList;
 		
 		SLList* sllCreate();
-		int sllDestroy(sllist* list);
+		int sllDestroy(SLList* list);
 		int sllInsertFirst(SLList *list, void* data);
 		void* sllRemoveFirst(SLList* list);
 		int sllInsertLast(SLList* list, void* data);
@@ -29,7 +29,7 @@
 		typedef struct _sllist_ SLList;
 
 		SLList* sllCreate();
-		int sllDestroy(sllist* list);
+		int sllDestroy(SLList* list);
 		int sllInsertFirst(SLList *list, void* data);
 		void* sllRemoveFirst(SLList* list);
 		int sllInsertLast(SLList* list, void* data);

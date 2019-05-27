@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "colecao.h"
 #include "myLib.c"
+#include "sllist.h"
 
 
 int main(){
@@ -24,10 +25,12 @@ int main(){
 			if(pessoas != NULL){
 				printf("Lista ja criada\n");
 			}else{
-				printf("Digite capacidade total da colecao:");
-				setbuf(stdin, NULL);
-				scanf("%d", &TotalElms);
-				pessoas = colCreate(TotalElms);
+				pessoas = sllCreate();
+				if(pessoas != NULL){
+					printf("Lista criada com sucesso\n");
+				}else{
+					printf("ERRO: lista nao criada\n");
+				}
 			}
 	
 		}else if(opcao == 2){
@@ -36,7 +39,7 @@ int main(){
 			}else{
 				printf("ERRO: Colecao inexistente\n");
 			}
-
+/*
 		}else if(opcao == 3){
 			//codigo para procurar elementos na coleção
 			
@@ -54,16 +57,16 @@ int main(){
 			}else{
 				printf("ERRO: Colecao inexistente\n");
 			}
-
+*/
 		}else if(opcao == 5){
 			//codigo para listar todos os elemetos da coleção
 
 			if(pessoas != NULL){
 				printTodasPessoas(pessoas);
 			}else{
-				printf("ERRO: Colecao inexistente\n");
+				printf("ERRO: Lista inexistente\n");
 			}
-
+/*
 		}else if(opcao == 6){
 			//codigo para destruir coleção;
 			
@@ -73,7 +76,7 @@ int main(){
 			}else{
 				printf("ERRO: Colecao inexistente\n");
 			}
-		}else{
+*/		}else{
 			printf("Opcao invalida \nDigite uma opcao valida\n");
 		}
 

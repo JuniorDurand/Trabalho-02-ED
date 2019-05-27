@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include "colecao.h"
+#include "sllist.h"
 
 
 typedef struct _pessoa_{
@@ -37,7 +38,7 @@ void printPessoa(Pessoa *p){
 }
 
 
-void criaPessoa(Col *c){
+void criaPessoa(SLList *c){
 	if(c != NULL){
 		Pessoa *p = (Pessoa*)malloc(sizeof(Pessoa));
 		printf("Digite o nome:");
@@ -55,14 +56,14 @@ void criaPessoa(Col *c){
 		printf("Digite o CPF:");
 		setbuf(stdin, NULL);
 		fgets(p->CPF,15,stdin);
-		int flag = colInsert(c, (void*)p);
+		int flag = sllInsertFirst(c, (void*)p);
 		if(flag){
 			printf("Elemento inserido com sucesso\n");
 		}else{
-			printf("Elemento não inserido na colecao\n");
+			printf("Elemento não inserido na lista\n");
 		}
 	}else{
-		printf("ERRO: colecao inexistente\n");
+		printf("ERRO: lista inexistente\n");
 	}
 
 }
@@ -254,16 +255,16 @@ void removePessoa(Col *c){
 	}
 }
 
-void printTodasPessoas(Col *c){
+void printTodasPessoas(SLList *c){
 	if(c != NULL){
 		printf("\n---------------\n");		
-		Pessoa *p = (Pessoa*)malloc(sizeof(Pessoa));
-		p = (Pessoa*)colQueryFirst(c);
+		Pessoa *p ;
+		p = (Pessoa*)sllGetFirst(c);
 		while(p != NULL){
-			colStatus(c);
+			//colStatus(c);
 			printPessoa(p);
 			printf("\n---------------\n");
-			p = (Pessoa*)colQueryNext(c);
+			p = (Pessoa*)sllGetNext(c);
 		}
 	}
 }

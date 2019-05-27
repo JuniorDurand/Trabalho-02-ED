@@ -16,7 +16,7 @@ SLList* sllCreate(){
 	return NULL;
 }
 
-int sllDestroy(sllist* list){
+int sllDestroy(SLList* list){
 	if(list != NULL){
 		if(list->first == NULL){
 			free(list);
@@ -121,6 +121,7 @@ void* sllQuery(SLList *list, void* key, int(*cmp)(void*,void*)){
 void* sllRemoveSpec(SLList *list, void* key, int(*cmp)(void*,void*)){
 	SLNode *spec, *prev;
 	void* data;
+	int stat;
 	if(list != NULL){
 		if(list->first != NULL){
 			prev = NULL;
@@ -161,8 +162,10 @@ void* sllGetNext(SLList* list){
 	if(list != NULL){
 		if(list->cur != NULL){
 			list->cur = list->cur->next;
-			data = list->cur->data;
-			return data;
+			if(list->cur != NULL){
+				data = list->cur->data;
+				return data;
+			}
 		}
 	}
 	return NULL;
