@@ -6,7 +6,7 @@
 
 int main(){
 	int TotalElms, opcao = 0;
-	Col *pessoas = NULL;
+	SLList *pessoas = NULL;
 	
 
 	do{
@@ -17,12 +17,12 @@ int main(){
 			if (pessoas == NULL){
 				return 0;
 			}else{
-				printf("ERRO: colecao alocada na memoria \nPara prosseguir destrua a colecao\n");
+				printf("ERRO: lista alocada na memoria \nPara prosseguir destrua a lista\n");
 				opcao = -1;
 			}
 		}else if(opcao == 1){
 			if(pessoas != NULL){
-				printf("Colecao ja criada\n");
+				printf("Lista ja criada\n");
 			}else{
 				printf("Digite capacidade total da colecao:");
 				setbuf(stdin, NULL);
