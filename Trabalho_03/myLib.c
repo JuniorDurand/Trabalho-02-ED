@@ -76,8 +76,9 @@ void printMenuProcura(){
 	printf("2 - Procurar por CPF\n");
 }
 
-int compCPF(void *x, char *b){
+int compCPF( void *y, void *x){
 	Pessoa *a = (Pessoa*)x;
+	char* b = (char*)y;
 	if(strcmp(a->CPF, b)==0){
 		return true;
 	}else{
@@ -90,7 +91,7 @@ int compCPF(void *x, char *b){
 
 
 
-int compNome(void *x, char *b){
+int compNome(char *b, void *x){
 	Pessoa *a = (Pessoa*)x;
 	if(strcmp(a->nome, b)==0){
 		return true;
@@ -101,49 +102,43 @@ int compNome(void *x, char *b){
 
 
 
-int procuraPorNome(Col *c){
+int procuraPorNome(SLList *c){
 	Pessoa *p;
 	char nomeProc[50];
 	int flag = true;
 	printf("Digite o nome:");
 	setbuf(stdin, NULL);
 	fgets(nomeProc,50,stdin);
-	p = (Pessoa*)colQueryFirst(c);
-	while(p != NULL){
-		if(compNome( p, nomeProc)){
-			printPessoa(p);
-			//flag = false;
-			return true;
-		}else{
-			p = (Pessoa*)colQueryNext(c);
-		}
+	p = (Pessoa*)sllQuery(c , nomeProc, compCPF);
+	if(p != NULL){
+		printPessoa(p);
+		//flag = false;
+		return true;
+	}else{
+		return false;
 	}
 	if(flag){
 		//printf("\nPessoa não encontrada\n");
-		return false;
 	}
 }
 
-int procuraPorCPF(Col *c){
+int procuraPorCPF(SLList *c){
 	Pessoa *p;
 	char CPFProc[15];
 	int flag = true;
 	printf("Digite o CPF:");
 	setbuf(stdin, NULL);
 	fgets(CPFProc,15,stdin);
-	p = (Pessoa*)colQueryFirst(c);
-	while(p != NULL){
-		if(compCPF( p, CPFProc)){
-			printPessoa(p);
-			//flag = false;
-			return true;
-		}else{
-			p = (Pessoa*)colQueryNext(c);
-		}
+	p = (Pessoa*)sllQuery(c , CPFProc, compCPF);
+	if(p != NULL){
+		printPessoa(p);
+		//flag = false;
+		return true;
+	}else{
+		return false;
 	}
 	if(flag){
 		//printf("\nPessoa não encontrada\n");
-		return false;
 	}
 }
 
@@ -192,7 +187,7 @@ Pessoa* retornaPorCPF(Col *c){
 	}
 }
 
-void ProcuraPessoa(Col *c){
+void ProcuraPessoa(SLList *c){
 	if(c != NULL){
 		int opcao;
 		

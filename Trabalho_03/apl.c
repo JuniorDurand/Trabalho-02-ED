@@ -39,7 +39,7 @@ int main(){
 			}else{
 				printf("ERRO: Colecao inexistente\n");
 			}
-/*
+
 		}else if(opcao == 3){
 			//codigo para procurar elementos na coleção
 			
@@ -48,7 +48,7 @@ int main(){
 			}else{
 				printf("ERRO: Colecao inexistente\n");
 			}
-
+/*
 		}else if(opcao == 4){
 			//codigo para remover elementos
 			
