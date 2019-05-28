@@ -37,7 +37,7 @@ int main(){
 			if(pessoas != NULL){
 				criaPessoa(pessoas);
 			}else{
-				printf("ERRO: Colecao inexistente\n");
+				printf("ERRO: Lista inexistente\n");
 			}
 
 		}else if(opcao == 3){
@@ -46,18 +46,18 @@ int main(){
 			if(pessoas != NULL){
 				ProcuraPessoa(pessoas);
 			}else{
-				printf("ERRO: Colecao inexistente\n");
+				printf("ERRO: Lista inexistente\n");
 			}
-/*
+
 		}else if(opcao == 4){
 			//codigo para remover elementos
 			
 			if(pessoas != NULL){
 				removePessoa(pessoas);
 			}else{
-				printf("ERRO: Colecao inexistente\n");
+				printf("ERRO: Lista inexistente\n");
 			}
-*/
+
 		}else if(opcao == 5){
 			//codigo para listar todos os elemetos da coleção
 
@@ -66,17 +66,17 @@ int main(){
 			}else{
 				printf("ERRO: Lista inexistente\n");
 			}
-/*
+
 		}else if(opcao == 6){
 			//codigo para destruir coleção;
 			
 			if(pessoas != NULL){
-				destruirColecao(pessoas);
+				destruirLista(pessoas);
 				pessoas = NULL;
 			}else{
-				printf("ERRO: Colecao inexistente\n");
+				printf("ERRO: Lista inexistente\n");
 			}
-*/		}else{
+		}else{
 			printf("Opcao invalida \nDigite uma opcao valida\n");
 		}
 

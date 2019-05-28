@@ -16,7 +16,7 @@ typedef struct _pessoa_{
 
 
 void printMenu(){
-	printf("1 - Criar Colecao\n");
+	printf("1 - Criar Lista\n");
 	printf("2 - Inserir elemento\n");
 	printf("3 - Consultar elemento\n");
 	printf("4 - Remover elemento\n");
@@ -76,6 +76,13 @@ void printMenuProcura(){
 	printf("2 - Procurar por CPF\n");
 }
 
+
+void printMenuRemover(){
+	printf("1 - Remover por nome\n");
+	printf("2 - Remover por CPF\n");
+}
+
+
 int compCPF( void *y, void *x){
 	Pessoa *a = (Pessoa*)x;
 	char* b = (char*)y;
@@ -106,87 +113,33 @@ int compNome(void* y, void *x){
 int procuraPorNome(SLList *c){
 	Pessoa *p;
 	char nomeProc[50];
-	int flag = true;
 	printf("Digite o nome:");
 	setbuf(stdin, NULL);
 	fgets(nomeProc,50,stdin);
 	p = (Pessoa*)sllQuery(c , nomeProc, compNome);
 	if(p != NULL){
 		printPessoa(p);
-		//flag = false;
 		return true;
 	}else{
 		return false;
-	}
-	if(flag){
-		//printf("\nPessoa não encontrada\n");
 	}
 }
 
 int procuraPorCPF(SLList *c){
 	Pessoa *p;
 	char CPFProc[15];
-	int flag = true;
 	printf("Digite o CPF:");
 	setbuf(stdin, NULL);
 	fgets(CPFProc,15,stdin);
 	p = (Pessoa*)sllQuery(c , CPFProc, compCPF);
 	if(p != NULL){
 		printPessoa(p);
-		//flag = false;
 		return true;
 	}else{
 		return false;
 	}
-	if(flag){
-		//printf("\nPessoa não encontrada\n");
-	}
 }
 
-
-Pessoa* retornaPorNome(Col *c){
-	Pessoa *p;
-	char nomeProc[50];
-	int flag = true;
-	printf("Digite o nome:");
-	setbuf(stdin, NULL);
-	fgets(nomeProc,50,stdin);
-	p = (Pessoa*)colQueryFirst(c);
-	while(p != NULL){
-		if(compNome( p, nomeProc)){
-			flag = false;
-			return p;
-		}else{
-			p = (Pessoa*)colQueryNext(c);
-		}
-	}
-	if(flag){
-		//printf("\nPessoa não encontrada\n");
-		return NULL;
-	}
-}
-
-Pessoa* retornaPorCPF(Col *c){
-	Pessoa *p;
-	char CPFProc[15];
-	int flag = true;
-	printf("Digite o CPF:");
-	setbuf(stdin, NULL);
-	fgets(CPFProc,15,stdin);
-	p = (Pessoa*)colQueryFirst(c);
-	while(p != NULL){
-		if(compCPF( p, CPFProc)){
-			flag = false;
-			return p;
-		}else{
-			p = (Pessoa*)colQueryNext(c);
-		}
-	}
-	if(flag){
-		//printf("\nPessoa não encontrada\n");
-		return NULL;
-	}
-}
 
 void ProcuraPessoa(SLList *c){
 	if(c != NULL){
@@ -214,42 +167,71 @@ void ProcuraPessoa(SLList *c){
 	}
 }
 
+int removePorNome(SLList *c){
+	Pessoa *p;
+	char nomeProc[50];
+	printf("Digite o nome:");
+	setbuf(stdin, NULL);
+	fgets(nomeProc,50,stdin);
+	p = (Pessoa*)sllRemoveSpec(c , nomeProc, compNome);
+	if(p != NULL){
+		printPessoa(p);
+		free(p);
+		return true;
+	}else{
+		return false;
+	}
+}
 
-void removePessoa(Col *c){
+int removePorCPF(SLList *c){
+	Pessoa *p;
+	char CPFProc[15];
+	int flag = true;
+	printf("Digite o CPF:");
+	setbuf(stdin, NULL);
+	fgets(CPFProc,15,stdin);
+	p = (Pessoa*)sllRemoveSpec(c ,CPFProc , compCPF);
+	if(p != NULL){
+		printPessoa(p);
+		free(p);
+		//flag = false;
+		return true;
+	}else{
+		return false;
+	}
+	if(flag){
+	}
+}
+
+void removePessoa(SLList *c){
 	if(c != NULL){
 		int opcao;
 		
 		do{
-			printMenuProcura();
+			printMenuRemover();
 			setbuf(stdin, NULL);
 			scanf("%d", &opcao);
 			if(opcao == 1){
-				Pessoa *pesRemov;
-				pesRemov = retornaPorNome(c);
-				if(pesRemov!=NULL){
-					Pessoa *aux = (Pessoa*)colRemoveVoid(c, (void*)pesRemov);
-					printPessoa(pesRemov);
-					free(pesRemov);
+				int flag = removePorNome(c);
+				if(flag){
 					printf("Pessoa removida com sucesso\n");
 				}else{
 					printf("Pessoa nao encontrada\n");
 				}				
 
 			}else if(opcao == 2){
-				Pessoa *pesRemov;
-				pesRemov = retornaPorCPF(c);
-				if(pesRemov!=NULL){
-					Pessoa *aux = (Pessoa*)colRemoveVoid(c, (void*)pesRemov);
-					printPessoa(pesRemov);
-					free(pesRemov);
+				int flag = removePorCPF(c);
+				if(flag){
 					printf("Pessoa removida com sucesso\n");
 				}else{
 					printf("Pessoa nao encontrada\n");
-				}
+				}				
 			}
 		}while(opcao < 1 || opcao > 2);
 	}
 }
+
+
 
 void printTodasPessoas(SLList *c){
 	if(c != NULL){
@@ -268,31 +250,31 @@ void printTodasPessoas(SLList *c){
 
 
 
-void destruirColecao(Col *pessoas){
-	int teste = colDestroy(pessoas);
+void destruirLista(SLList *pessoas){
+	int teste = sllDestroy(pessoas);
 	if(teste == true){
 		pessoas = NULL;
-		printf("Colecao destruida com sucesso\n");
+		printf("Lista destruida com sucesso\n");
 	}else{
-		printf("Erro ao destruir colecao\n");
-		printf("Elementos dentro da colecao.\n");
+		printf("Erro ao destruir a lista\n");
+		printf("Elementos dentro da lista.\n");
 		printf("Remover todos os elementos e destruir(1 - Sim/ 2 -Nao).\n");
 		int remov;
 		setbuf(stdin,NULL);
 		scanf("%d",&remov);
 		if(remov == 1){
-			Pessoa *p = (Pessoa*)colRemoveLast(pessoas);
+			Pessoa *p = (Pessoa*)sllRemoveFirst(pessoas);
 			while(p!=NULL){
 				printPessoa(p);
-				p = (Pessoa*)colRemoveLast(pessoas);
+				p = (Pessoa*)sllRemoveFirst(pessoas);
 			}
-			teste = colDestroy(pessoas);
+			teste = sllDestroy(pessoas);
 			if (teste == true){
-				pessoas = NULL;
-				printf("Colecao destruida com sucesso\n");
+				//pessoas = NULL;
+				printf("Lista destruida com sucesso\n");
 
 			}else{
-				printf("ERRO ao destruir colecao\n");
+				printf("ERRO ao destruir lista\n");
 			}
 		}
 
