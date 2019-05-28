@@ -91,7 +91,8 @@ int compCPF( void *y, void *x){
 
 
 
-int compNome(char *b, void *x){
+int compNome(void* y, void *x){
+	char *b = (char*)y;
 	Pessoa *a = (Pessoa*)x;
 	if(strcmp(a->nome, b)==0){
 		return true;
@@ -109,7 +110,7 @@ int procuraPorNome(SLList *c){
 	printf("Digite o nome:");
 	setbuf(stdin, NULL);
 	fgets(nomeProc,50,stdin);
-	p = (Pessoa*)sllQuery(c , nomeProc, compCPF);
+	p = (Pessoa*)sllQuery(c , nomeProc, compNome);
 	if(p != NULL){
 		printPessoa(p);
 		//flag = false;
