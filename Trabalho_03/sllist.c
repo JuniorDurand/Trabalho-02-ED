@@ -20,6 +20,7 @@ int sllDestroy(SLList* list){
 	if(list != NULL){
 		if(list->first == NULL){
 			free(list);
+			list = NULL;
 			return TRUE;
 		}
 	}

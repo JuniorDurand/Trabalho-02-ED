@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "colecao.h"
+
 #include "myLib.c"
 #include "sllist.h"
 
@@ -69,10 +69,12 @@ int main(){
 
 		}else if(opcao == 6){
 			//codigo para destruir coleção;
-			
+			int flag;
 			if(pessoas != NULL){
-				destruirLista(pessoas);
-				pessoas = NULL;
+				flag = destruirLista(pessoas);
+				if (flag){
+					pessoas = NULL;
+				}
 			}else{
 				printf("ERRO: Lista inexistente\n");
 			}

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include "colecao.h"
+
 #include "sllist.h"
 
 
@@ -250,11 +250,12 @@ void printTodasPessoas(SLList *c){
 
 
 
-void destruirLista(SLList *pessoas){
+int destruirLista(SLList *pessoas){
 	int teste = sllDestroy(pessoas);
 	if(teste == true){
 		pessoas = NULL;
 		printf("Lista destruida com sucesso\n");
+		return true;
 	}else{
 		printf("Erro ao destruir a lista\n");
 		printf("Elementos dentro da lista.\n");
@@ -270,8 +271,9 @@ void destruirLista(SLList *pessoas){
 			}
 			teste = sllDestroy(pessoas);
 			if (teste == true){
-				//pessoas = NULL;
+				pessoas = NULL;
 				printf("Lista destruida com sucesso\n");
+				return true;
 
 			}else{
 				printf("ERRO ao destruir lista\n");
@@ -279,4 +281,5 @@ void destruirLista(SLList *pessoas){
 		}
 
 	}
+	return false;
 }
