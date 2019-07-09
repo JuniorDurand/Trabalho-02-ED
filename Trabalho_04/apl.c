@@ -27,16 +27,26 @@ int main(){
 		setbuf(stdin, NULL);
 		scanf("%d", &opcao);
 		if(opcao == 0){
+			//codigo para sair do programa
+
 			if (pessoas == NULL){
 				return 0;
 			}else{
-				printf("ERRO: lista alocada na memoria \nPara prosseguir destrua a lista\n");
+				printf("ERRO: estrutura alocada na memoria \nPara prosseguir destrua a estrutura\n");
 				opcao = -1;
 			}
 		
 		}else if(opcao == 1){
+			//codigo para criar estrutura
+
 			if(pessoas == NULL){
 				pessoas = criaStruct();
+				if(pessoas != NULL){
+					printf("estrutura criada com sucesso\n");
+				}else{
+					printf("estrutura nao criada com sucesso\n");
+					pessoas = NULL;
+				}
 			}else{
 				printf("ERRO: Estrutura ja alocada\n");
 			}
@@ -45,19 +55,19 @@ int main(){
 			if(pessoas != NULL){
 				criaPessoa(pessoas);
 			}else{
-				printf("ERRO: Lista inexistente\n");
+				printf("ERRO: Estrutura inexistente\n");
 			}
 
 		}else if(opcao == 3){
-			//codigo para procurar elementos na coleção
+			//codigo para procurar elementos na estrutura
 			
 			if(pessoas != NULL){
 				ProcuraPessoa(pessoas);
 			}else{
-				printf("ERRO: Lista inexistente\n");
+				printf("ERRO: Estrutura inexistente\n");
 			}
 
-		/*
+		
 
 		}else if(opcao == 4){
 			//codigo para remover elementos
@@ -65,41 +75,39 @@ int main(){
 			if(pessoas != NULL){
 				removePessoa(pessoas);
 			}else{
-				printf("ERRO: Lista inexistente\n");
+				printf("ERRO: Estrutura inexistente\n");
 			}
 	
-		*/
+		
 
 		}else if(opcao == 5){
-			//codigo para listar todos os elemetos da coleção
+			//codigo para exibir todos os elemetos da estrutura
 
 			if(pessoas != NULL){
 				printTodasPessoas(pessoas);
 			}else{
-				printf("ERRO: Lista inexistente\n");
+				printf("ERRO: Estrutura inexistente\n");
 			}
 
-		/*
+		
 
 		}else if(opcao == 6){
-			//codigo para destruir coleção;
+			//codigo para destruir estrutura;
 			int flag;
 			if(pessoas != NULL){
-				flag = destruirLista(pessoas);
+				flag = destruirEstrutura(pessoas);
 				if (flag){
 					pessoas = NULL;
 				}
 			}else{
-				printf("ERRO: Lista inexistente\n");
+				printf("ERRO: Estrutura inexistente\n");
 			}
 
-		*/
+		
 
 		}else{
 			printf("Opcao invalida \nDigite uma opcao valida\n");
 		}
-
-
 
 
 	}while(opcao != 0);

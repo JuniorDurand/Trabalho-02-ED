@@ -162,3 +162,10 @@ int abpCountLeafNodes(TNode *t){
     }
     return 0;
 }
+
+int abpIsEmpty(TNode *t){
+    if(t == NULL){
+        return TRUE;
+    }
+    return FALSE;
+}

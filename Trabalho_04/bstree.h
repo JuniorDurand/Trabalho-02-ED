@@ -15,6 +15,8 @@
 		TNode* abpRemove(TNode *t, void* key, void** data, int(*cmp)(void*, void*));
 		void* abpQuery(TNode *t, void *key, int(*cmp)(void*, void*));
 		int abpAltura(TNode* t);
+		int abpCountNodes(TNode *t);
+		int abpIsEmpty(TNode *t);
 
 
 	#else	
@@ -29,6 +31,8 @@
 		TNode* abpRemove(TNode *t, void* key, void** data, int(*cmp)(void*, void*));
 		void* abpQuery(TNode *t, void *key, int(*cmp)(void*, void*));
 		int abpCountNodes(TNode *t);
+		int abpIsEmpty(TNode *t);
+		int abpAltura(TNode* t);
 
 	#endif 
 

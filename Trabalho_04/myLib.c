@@ -69,7 +69,7 @@ int compStructNome(void* y, void *x){
 
 
 void printMenu(){
-	printf("1 - Criar Lista\n");
+	printf("1 - Criar Estrutura\n");
 	printf("2 - Inserir elemento\n");
 	printf("3 - Consultar elemento\n");
 	printf("4 - Remover elemento\n");
@@ -93,11 +93,13 @@ void printPessoa(Pessoa *p){
 void printPessoa2(void *ps){
 	Pessoa *p = (Pessoa*)ps; 
 	if(p != NULL){
+		printf("-----------------------\n");
 		printf("Nome: %s",p->nome );
 		printf("Idade: %d\n",p->idade);
 		printf("Quantidade de filhos: %d\n",p->numFilhos);
 		printf("Salario: %f\n",p->salario);
 		printf("CPF: %s\n",p->CPF);
+		printf("-----------------------\n");
 	}
 }
 
@@ -208,37 +210,42 @@ void ProcuraPessoa(Pessoas *c){
 }
 
 
-/*
+
 
 int removePorNome(Pessoas *c){
-	Pessoa *p;
+	Pessoa *p, *pTest;
 	char nomeProc[50];
 	printf("Digite o nome:");
 	setbuf(stdin, NULL);
 	fgets(nomeProc,50,stdin);
-	p = (Pessoa*)sllRemoveSpec(c , nomeProc, compNome);
+	c->pessoasNome = abpRemove(c->pessoasNome, nomeProc, (void**)&p, compNome);
 	if(p != NULL){
-		printPessoa(p);
-		free(p);
-		return true;
+		c->pessoasCPF = abpRemove(c->pessoasCPF, p->CPF, (void**)&pTest, compCPF);
+		if(p==pTest){
+			printPessoa(p);
+			free(p);
+			return true;
+		}
 	}else{
 		return false;
 	}
 }
 
 int removePorCPF(Pessoas *c){
-	Pessoa *p;
+	Pessoa *p, *pTest;
 	char CPFProc[15];
 	int flag = true;
 	printf("Digite o CPF:");
 	setbuf(stdin, NULL);
 	fgets(CPFProc,15,stdin);
-	p = (Pessoa*)sllRemoveSpec(c ,CPFProc , compCPF);
+	c->pessoasCPF = abpRemove(c->pessoasCPF, CPFProc, (void**)&p, compCPF);
 	if(p != NULL){
-		printPessoa(p);
-		free(p);
-		//flag = false;
-		return true;
+		c->pessoasNome = abpRemove(c->pessoasNome, p->nome, (void**)&pTest, compNome);
+		if(p==pTest){
+			printPessoa(p);
+			free(p);
+			return true;
+		}
 	}else{
 		return false;
 	}
@@ -274,21 +281,40 @@ void removePessoa(Pessoas *c){
 	}
 }
 
-*/
 
-void printTodasPessoas(Pessoas *c){
-	if(c != NULL){
-		Simetrica(c->pessoasNome, printPessoa2);
-		printf("-----------------------\n");
-		Simetrica(c->pessoasCPF, printPessoa2);
+
+void printTodasPessoas(Pessoas *p){
+	int stat = false;
+	if(p != NULL){
+		stat = abpIsEmpty(p->pessoasNome) && abpIsEmpty(p->pessoasCPF);
+		if(stat != true){
+			Simetrica(p ->pessoasNome, printPessoa2);
+		}else{
+			printf("-----------------------\n");
+			printf("----Estrutura vazia----\n");
+			printf("-----------------------\n");			
+		}
+		//Simetrica(c->pessoasCPF, printPessoa2);
 	}
 }
 
 
-/*
+int StructDestroy(Pessoas *p){
+	int flag;
+	if(p != NULL){
+		flag = abpIsEmpty(p->pessoasNome) && abpIsEmpty(p->pessoasCPF);
+		if(flag == true){
+			free(p);
+			return true;
+		}
+	}
+	return false;
+}
 
-int destruirLista(Pessoas *pessoas){
-	int teste = sllDestroy(pessoas);
+
+
+int destruirEstrutura(Pessoas *pessoas){
+	int teste = StructDestroy(pessoas);
 	if(teste == true){
 		pessoas = NULL;
 		printf("Lista destruida com sucesso\n");
@@ -296,30 +322,9 @@ int destruirLista(Pessoas *pessoas){
 	}else{
 		printf("Erro ao destruir a lista\n");
 		printf("Elementos dentro da lista.\n");
-		printf("Remover todos os elementos e destruir(1 - Sim/ 2 -Nao).\n");
-		int remov;
-		setbuf(stdin,NULL);
-		scanf("%d",&remov);
-		if(remov == 1){
-			Pessoa *p = (Pessoa*)sllRemoveFirst(pessoas);
-			while(p!=NULL){
-				printPessoa(p);
-				p = (Pessoa*)sllRemoveFirst(pessoas);
-			}
-			teste = sllDestroy(pessoas);
-			if (teste == true){
-				pessoas = NULL;
-				printf("Lista destruida com sucesso\n");
-				return true;
-
-			}else{
-				printf("ERRO ao destruir lista\n");
-			}
-		}
-
+		
 	}
 	return false;
 }
 
 
-*/
