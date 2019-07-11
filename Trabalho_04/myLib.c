@@ -213,7 +213,7 @@ void ProcuraPessoa(Pessoas *c){
 
 
 int removePorNome(Pessoas *c){
-	Pessoa *p, *pTest;
+	Pessoa *p=NULL, *pTest=NULL;
 	char nomeProc[50];
 	printf("Digite o nome:");
 	setbuf(stdin, NULL);
@@ -232,7 +232,7 @@ int removePorNome(Pessoas *c){
 }
 
 int removePorCPF(Pessoas *c){
-	Pessoa *p, *pTest;
+	Pessoa *p=NULL, *pTest=NULL;
 	char CPFProc[15];
 	int flag = true;
 	printf("Digite o CPF:");
@@ -317,11 +317,11 @@ int destruirEstrutura(Pessoas *pessoas){
 	int teste = StructDestroy(pessoas);
 	if(teste == true){
 		pessoas = NULL;
-		printf("Lista destruida com sucesso\n");
+		printf("estrutura destruida com sucesso\n");
 		return true;
 	}else{
-		printf("Erro ao destruir a lista\n");
-		printf("Elementos dentro da lista.\n");
+		printf("Erro ao destruir a estrutura\n");
+		printf("Elementos dentro da estrutura.\n");
 		
 	}
 	return false;
